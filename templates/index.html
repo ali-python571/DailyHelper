@@ -227,61 +227,49 @@
                 "Breathing exercises to reduce stress! 🌬️",
                 "Motivate yourself and others! 🌟"
             ]
-        };
+         };
+// ===== Maslahatlar =====
+const adviceDiv = document.getElementById('advice');
+const btn = document.getElementById('newAdviceBtn');
+const langSelect = document.getElementById('langSelect');
+let currentLang = 'uz';
 
-        const adviceDiv = document.getElementById('advice');
-        const btn = document.getElementById('newAdviceBtn');
-        const langSelect = document.getElementById('langSelect');
-        let currentLang = 'uz';
+function showRandomAdvice() {
+    const randomIndex = Math.floor(Math.random() * advices[currentLang].length);
+    adviceDiv.textContent = advices[currentLang][randomIndex];
+}
 
-        function showRandomAdvice() {
-            const randomIndex = Math.floor(Math.random() * advices[currentLang].length);
-            adviceDiv.textContent = advices[currentLang][randomIndex];
-        }
+btn.addEventListener('click', showRandomAdvice);
 
-        btn.addEventListener('click', showRandomAdvice);
-const commentInput = document.getElementById('commentInput');
-const submitComment = document.getElementById('submitComment');
-const commentList = document.getElementById('commentList');
-
-submitComment.addEventListener('click', () => {
-    const comment = commentInput.value.trim();
-    if(comment !== "") {
-        const li = document.createElement('li');
-        li.textContent = comment;
-        commentList.appendChild(li);
-        commentInput.value = "";
-    }
+langSelect.addEventListener('change', () => {
+    currentLang = langSelect.value;
+    showRandomAdvice();
 });
 
-        langSelect.addEventListener('change', () => {
-            currentLang = langSelect.value;
-            showRandomAdvice();
-        });
+               // Like
 let likes = 0;
 const likesDiv = document.getElementById('likes');
 const likeBtn = document.getElementById('likeBtn');
+
+likeBtn.addEventListener('click', () => {
+    likes++;
+    likesDiv.textContent = "Likes: " + likes;
+});
+
+// ===== Comment =====
 const commentInput = document.getElementById('commentInput');
 const submitComment = document.getElementById('submitComment');
 const commentList = document.getElementById('commentList');
 
-// Like bosilganda
-likeBtn.addEventListener('click', () => {
-    likes++;
-    likesDiv.textContent = `Likes: ${likes}`;
-});
-
-// Fikr yuborish
 submitComment.addEventListener('click', () => {
     const comment = commentInput.value.trim();
-    if(comment !== "") {
+    if (comment !== "") {
         const li = document.createElement('li');
         li.textContent = comment;
         commentList.appendChild(li);
         commentInput.value = "";
     }
 });
-
     </script>
 </body>
 </html>

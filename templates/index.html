@@ -101,6 +101,14 @@
     <h1>Bugungi foydali maslahat ✨</h1>
     <div id="advice">Ishni kichik qismga bo‘ling! 💡</div>
     <button id="newAdviceBtn">Yangi maslahat</button>
+<div id="likes">Likes: 0</div>
+<button id="likeBtn">👍 Like</button>
+
+<div id="commentSection">
+    <textarea id="commentInput" placeholder="Fikringizni yozing..."></textarea>
+    <button id="submitComment">Yuborish</button>
+    <ul id="commentList"></ul>
+</div>
     
     <!-- Til tanlash -->
     <select id="langSelect">
@@ -232,6 +240,30 @@
             currentLang = langSelect.value;
             showRandomAdvice();
         });
+let likes = 0;
+const likesDiv = document.getElementById('likes');
+const likeBtn = document.getElementById('likeBtn');
+const commentInput = document.getElementById('commentInput');
+const submitComment = document.getElementById('submitComment');
+const commentList = document.getElementById('commentList');
+
+// Like bosilganda
+likeBtn.addEventListener('click', () => {
+    likes++;
+    likesDiv.textContent = `Likes: ${likes}`;
+});
+
+// Fikr yuborish
+submitComment.addEventListener('click', () => {
+    const comment = commentInput.value.trim();
+    if(comment !== "") {
+        const li = document.createElement('li');
+        li.textContent = comment;
+        commentList.appendChild(li);
+        commentInput.value = "";
+    }
+});
+
     </script>
 </body>
 </html>

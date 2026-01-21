@@ -101,6 +101,17 @@
     <h1>Bugungi foydali maslahat ✨</h1>
     <div id="advice">Ishni kichik qismga bo‘ling! 💡</div>
     <button id="newAdviceBtn">Yangi maslahat</button>
+<!-- Fikrlar bo'limi -->
+<div id="commentSection">
+    <textarea id="commentInput" placeholder="Fikringizni yozing..."></textarea>
+    <button id="submitComment">Yuborish</button>
+    <ul id="commentList">
+        <!-- Dastlabki 3 ta fikr -->
+        <li>“Ishni kichik qismga bo‘ling!”</li>
+        <li>“Kun boshida eng muhim vazifani bajaring!”</li>
+        <li>“Oraliq tanaffuslar qiling, aqliy charchash kamayadi!”</li>
+    </ul>
+</div>
 <div id="likes">Likes: 0</div>
 <button id="likeBtn">👍 Like</button>
 
@@ -235,6 +246,19 @@
         }
 
         btn.addEventListener('click', showRandomAdvice);
+const commentInput = document.getElementById('commentInput');
+const submitComment = document.getElementById('submitComment');
+const commentList = document.getElementById('commentList');
+
+submitComment.addEventListener('click', () => {
+    const comment = commentInput.value.trim();
+    if(comment !== "") {
+        const li = document.createElement('li');
+        li.textContent = comment;
+        commentList.appendChild(li);
+        commentInput.value = "";
+    }
+});
 
         langSelect.addEventListener('change', () => {
             currentLang = langSelect.value;

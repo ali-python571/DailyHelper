@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DailyHelper</title>
-
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KF69WKV3YP"></script>
     <script>
@@ -13,104 +14,223 @@
       gtag('js', new Date());
       gtag('config', 'G-KF69WKV3YP');
     </script>
-
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f8ff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 50px;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
         }
 
         #advice {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            max-width: 600px;
+            padding: 15px 25px;
+            border-radius: 15px;
+            background: rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
         }
 
         #newAdviceBtn {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #4caf50;
-            color: white;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: 600;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
+            background: #ff6f91;
+            color: #fff;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
 
         #newAdviceBtn:hover {
-            background-color: #45a049;
+            transform: scale(1.1);
+            background: #ff8fb1;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        #langSelect {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            background: #6a5af9;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        #langSelect:hover {
+            background: #7c6bff;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            #advice { font-size: 1.2rem; padding: 10px 20px; }
+            #newAdviceBtn { font-size: 1rem; padding: 12px 25px; }
+            #langSelect { font-size: 0.9rem; padding: 10px 15px; }
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to DailyHelper</h1>
-
-    <div id="advice">Bugungi maslahat: Ishni kichik qismga bo‘ling!</div>
+    <h1>Bugungi foydali maslahat ✨</h1>
+    <div id="advice">Ishni kichik qismga bo‘ling! 💡</div>
     <button id="newAdviceBtn">Yangi maslahat</button>
+    
+    <!-- Til tanlash -->
+    <select id="langSelect">
+        <option value="uz">O‘zbekcha</option>
+        <option value="en">English</option>
+    </select>
 
     <script>
-        const advices = [
-            "Ishni kichik qismga bo‘ling!",
-            "Kun boshida eng muhim vazifani bajaring!",
-            "Oraliq tanaffuslar qiling, aqliy charchash kamayadi!",
-            "Maqsadlarni yozing va nazorat qiling!",
-            "Har kun yangi narsani o‘rganing!",
-            "O‘zingizga kichik mukofot bering!",
-            "Yaxshi uyqu samaradorlikni oshiradi!",
-            "Har vazifani rejalashtiring!",
-            "Fikrlaringizni yozib boring!",
-            "Diqqatni jamlash uchun telefonni chetga qo‘ying!",
-            "Vazifalarni birinchi navbatda eng qiyinidan boshlang!",
-            "Choy yoki kofe bilan qisqa tanaffus qiling!",
-            "Yangi mahoratlarni o‘rganishga harakat qiling!",
-            "Sog‘liqni birinchi o‘ringa qo‘ying!",
-            "Har kuni 5 daqiqa meditatsiya qiling!",
-            "Kichik g‘alabalarni nishonlang!",
-            "O‘zingizni maqtang va motivatsiyani oshiring!",
-            "Maslahatlarni do‘stlaringiz bilan baham ko‘ring!",
-            "Har haftada maqsadlaringizni qayta ko‘rib chiqing!",
-            "Stressni kamaytirish uchun nafas mashqlarini bajaring!",
-            "Yangi kunni pozitiv fikr bilan boshlang!",
-            "Har kuni biror kitob o‘qing!",
-            "Ijodiy ishlar bilan shug‘ullaning!",
-            "Doimiy ravishda reja tuzing!",
-            "Shaxsiy rivojlanish uchun kunlik maqsad qo‘ying!",
-            "Vazifalarni tartib bilan bajaring!",
-            "O‘zingizga kichik dam olish vaqti ajrating!",
-            "Yaxshi ovqatlanish bilan energiyani oshiring!",
-            "Har kuni biror yangi so‘z o‘rganing!",
-            "Internetda foydali kontent izlang!",
-            "Tezkor fikrlar va yozuvlar bilan kreativlikni oshiring!",
-            "Jismoniy mashqlarni kundalik odat qiling!",
-            "Hamkasblar bilan yaxshi munosabatlarni rivojlantiring!",
-            "Vazifalarni boshlashdan oldin ularni rejalashtiring!",
-            "Qiyinchiliklardan qo‘rqmang, tajriba orttiring!",
-            "Kichik narsalardan mamnun bo‘ling!",
-            "Har kun biror yangi ish boshlang!",
-            "O‘zingizni rivojlantirish uchun kurslarga yoziling!",
-            "Tashriflaringizni kuzatish va tahlil qilishni odat qiling!",
-            "O‘zingizga kichik o‘yinlar qo‘shing!",
-            "Har kun yangi motivatsion gap o‘qing!",
-            "Vazifalarni bo‘laklarga ajrating!",
-            "Har bir yutug‘ingizni yozib boring!",
-            "O‘zingizni sog‘lom ovqatlanishga o‘rgating!",
-            "Fikrlaringizni boshqalar bilan bo‘lishing!",
-            "O‘zingizni har kuni sinab ko‘ring!",
-            "Ish vaqtini optimal boshqaring!",
-            "Xatolardan o‘rganing va qaytadan urinib ko‘ring!",
-            "Har bir yangi hafta uchun reja tuzing!",
-            "Kunlik natijalarni yozib boring!",
-            "O‘zingizni motivatsiya qilish uchun eslatmalar qo‘ying!",
-            "Doimiy o‘rganish odatini rivojlantiring!"
-        ];
+        const advices = {
+            uz: [
+                "Ishni kichik qismga bo‘ling! 💡",
+                "Kun boshida eng muhim vazifani bajaring! 🔥",
+                "Oraliq tanaffuslar qiling, aqliy charchash kamayadi! 🧘‍♂️",
+                "Maqsadlarni yozing va nazorat qiling! 📝",
+                "Har kun yangi narsani o‘rganing! 📚",
+                "Sog‘ligingizni birinchi o‘ringa qo‘ying! 🥗",
+                "Xatolardan qo‘rqmang, ulardan o‘rganing! ⚡",
+                "Vaqtni samarali boshqaring! ⏳",
+                "Pozitiv fikr yuriting! 🌈",
+                "Har kuni minnatdor bo‘ling! 🙏",
+                "Orzularingizni vizualizatsiya qiling! 🎯",
+                "Jamoada ishlashni o‘rganing! 🤝",
+                "O‘z ustingizda har kuni ishlang! 💪",
+                "Qisqa muddatli maqsadlar qo‘ying! 🗓️",
+                "Sifatni miqdordan ustun qo‘ying! 🏆",
+                "Ijodiy fikrlashni rivojlantiring! 🎨",
+                "Vazifalarni prioritetlarga ajrating! 📌",
+                "O‘zingizga kichik mukofot bering! 🎁",
+                "Tinchlik va fokus uchun meditatsiya qiling! 🕊️",
+                "Har bir muvaffaqiyatni nishonlang! 🎉",
+                "O‘z vaqtida uyquni tartibga soling! 🛌",
+                "Yangi g‘oyalarni yozib boring! 🖊️",
+                "Kuchli odatlarni shakllantiring! 💥",
+                "Keraksiz narsalardan voz keching! ❌",
+                "Doim o‘rganishga tayyor bo‘ling! 📖",
+                "Motivatsiyaingizni eslatib turing! 🔔",
+                "Ishni boshlashdan oldin reja tuzing! 🗒️",
+                "Har kuni jismoniy harakat qiling! 🏃‍♂️",
+                "Ijobiy insonlar bilan vaqt o‘tkazing! 🤗",
+                "Texnologiyani ongli ishlating! 💻",
+                "Harakat va tanaffus balansi! ⚖️",
+                "O‘zingizni doim rag‘batlantiring! 🌟",
+                "Yangi tillar o‘rganing! 🈶",
+                "Stressni boshqarish texnikalari! 🧘‍♀️",
+                "Ijodiy vaqtni rejalashtiring! 🖌️",
+                "Sog‘lom ovqatlaning! 🍏",
+                "Kun davomida suv ichishni unutmang! 💧",
+                "Orqaga qarash va muvaffaqiyatlarni eslang! 🔍",
+                "Boshqalarni ilhomlantiring! 🌟",
+                "Suhbat va networkingni rivojlantiring! 🗣️",
+                "Vazifalarni yozib boring va nazorat qiling! ✍️",
+                "O‘z kuchli tomonlaringizni biling! 💪",
+                "Doimiy o‘rganish — muvaffaqiyat kaliti! 🔑",
+                "Har kuni kichik yaxshilik qiling! 💖",
+                "Har doim optimistik bo‘ling! 🌞",
+                "O‘z ishlaringizni tartibga soling! 📂",
+                "Yangi imkoniyatlarni qidiring! 🔎",
+                "Hamkorlikda ishlashni o‘rganing! 🤝",
+                "Stressni kamaytirish uchun nafas olish mashqlari! 🌬️",
+                "O‘zingizni va boshqalarni rag‘batlantiring! 🌟"
+            ],
+            en: [
+                "Break tasks into small parts! 💡",
+                "Start the day with the most important task! 🔥",
+                "Take short breaks to reduce mental fatigue! 🧘‍♂️",
+                "Write down your goals and track them! 📝",
+                "Learn something new every day! 📚",
+                "Prioritize your health! 🥗",
+                "Don't fear mistakes, learn from them! ⚡",
+                "Manage your time efficiently! ⏳",
+                "Keep a positive mindset! 🌈",
+                "Be grateful every day! 🙏",
+                "Visualize your dreams! 🎯",
+                "Learn to work in a team! 🤝",
+                "Work on yourself every day! 💪",
+                "Set short-term goals! 🗓️",
+                "Quality over quantity! 🏆",
+                "Develop creative thinking! 🎨",
+                "Prioritize tasks! 📌",
+                "Reward yourself with small treats! 🎁",
+                "Meditate for peace and focus! 🕊️",
+                "Celebrate every success! 🎉",
+                "Maintain regular sleep schedule! 🛌",
+                "Write down new ideas! 🖊️",
+                "Build strong habits! 💥",
+                "Let go of unnecessary things! ❌",
+                "Always be ready to learn! 📖",
+                "Keep your motivation reminders! 🔔",
+                "Plan before starting work! 🗒️",
+                "Exercise daily! 🏃‍♂️",
+                "Spend time with positive people! 🤗",
+                "Use technology wisely! 💻",
+                "Balance work and breaks! ⚖️",
+                "Always motivate yourself! 🌟",
+                "Learn new languages! 🈶",
+                "Stress management techniques! 🧘‍♀️",
+                "Schedule creative time! 🖌️",
+                "Eat healthy! 🍏",
+                "Drink enough water! 💧",
+                "Reflect on achievements! 🔍",
+                "Inspire others! 🌟",
+                "Develop conversation and networking skills! 🗣️",
+                "Write and track tasks! ✍️",
+                "Know your strengths! 💪",
+                "Continuous learning is key to success! 🔑",
+                "Do small good deeds daily! 💖",
+                "Stay optimistic! 🌞",
+                "Organize your work! 📂",
+                "Seek new opportunities! 🔎",
+                "Learn to collaborate! 🤝",
+                "Breathing exercises to reduce stress! 🌬️",
+                "Motivate yourself and others! 🌟"
+            ]
+        };
 
         const adviceDiv = document.getElementById('advice');
         const btn = document.getElementById('newAdviceBtn');
+        const langSelect = document.getElementById('langSelect');
+        let currentLang = 'uz';
 
-        btn.addEventListener('click', () => {
-            const randomIndex = Math.floor(Math.random() * advices.length);
-            adviceDiv.textContent = advices[randomIndex];
+        function showRandomAdvice() {
+            const randomIndex = Math.floor(Math.random() * advices[currentLang].length);
+            adviceDiv.textContent = advices[currentLang][randomIndex];
+        }
+
+        btn.addEventListener('click', showRandomAdvice);
+
+        langSelect.addEventListener('change', () => {
+            currentLang = langSelect.value;
+            showRandomAdvice();
         });
     </script>
 </body>
